@@ -21,14 +21,17 @@ export default function App() {
   
   const handleClick=(data)=>setTimeout(() => Linking.openURL(data),300)
   const handleBarCodeScanned = async({ type, data }) => {
+    // if you want to use the information from a defined API in another component in the app
     if(!scanned){
       try {
         const res=await axios.get(data)
+        // store the information of the QRcode inside the app
         setInformations(res?.data)
       } catch (error) {
         console.log(error)
       }
       setScanned(true);
+      // visit the URL of the QRcode 
       handleClick(data)
     }
   };
